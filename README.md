@@ -54,22 +54,3 @@ svg can be references now anywher in the document
 ## How does it work?
 
 The SVG sprite injector loads the SVG sprite and puts it inline into the HTML `body` tag.
-
-
-
-## What are the advantages?
-
-Works on all browsers that support SVG. Yes, including Internet Explorer 9!
-* Intuitive usage. Insert the SVG images into your HTML code just as PNG images, with only one additional instruction.
-* Behaves like a normal <img> element if file not found or not available.
-* Native fallback for no Javascript
-
-
-
-## What are the Limitations?
-
-Attributes ismap, usemap, srcset, x and y of the <img> element will be ignored
-No caching on older browsers and on [shift]-reload
-Does not work locally on Chrome (due to same origin policy)
-
-## 
