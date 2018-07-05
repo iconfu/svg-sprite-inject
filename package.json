@@ -1,0 +1,22 @@
+{
+  "name": "@iconfu/svg-sprite-inject",
+  "version": "0.0.1",
+  "description": "simple bulletproof svg sprite injection",
+  "main": "dist/svg-sprite-inject.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inconf/svg-sprite-inject.git"
+  },
+  "keywords": [
+    "svg",
+    "sprite",
+    "inject"
+  ],
+  "author": "iconfu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inconf/svg-sprite-inject/issues"
+  },
+  "homepage": "https://github.com/inconf/svg-sprite-inject#readme"
+}
