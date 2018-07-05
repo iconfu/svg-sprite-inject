@@ -1,6 +1,6 @@
 {
   "name": "@iconfu/svg-sprite-inject",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "simple bulletproof svg sprite injection",
   "main": "dist/svg-sprite-inject.js",
   "scripts": {},
