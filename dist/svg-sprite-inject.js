@@ -1,15 +1,19 @@
-'use strict';
+/**
+ * SVGSpriteInject - Simple 
+ * https://github.com/iconfu/svg-sprite-inject
+ *
+ * Copyright (c) 2018 Iconfu <info@iconfu.com>
+ * @license MIT
+ */
 
 (function(window, document) {
-  var ATTRIBUTE_EXCLUSION_NAMES = ['src', 'alt', 'onload'];
 
-  /**
-   * Injects an Svg 
-   * @param {number} imgElement
-   * @param {string} locale
-   * @return {string}
-   */
-  var load = function(path, callback) {
+  'use strict';
+
+  var NOOP = function() {};
+
+  // load svg
+  function load(path, callback, errorCallback) {
     if (path) {
       var req = new XMLHttpRequest();
 
@@ -18,6 +22,8 @@
           var div = document.createElement('div');
           div.innerHTML = req.responseText;
           callback(div.childNodes[0]);
+        } else {
+          errorCallback(req.statusText);
         }
       };
 
@@ -26,38 +32,81 @@
     }
   };
 
+  function applyAllOptions(optionKey, optionsArr, func) {
+    for (var i = 0; i < optionsArr.length; ++i) {
+      var options = optionsArr[i];
+      if (options.hasOwnProperty(optionKey)) {
+        func(options[optionKey]);
+      }
+    }
+  };
+
   var spriteHandlerMap = {};
+  var cachedMap = {};
 
-  var SVGSpriteInject = function(path) {
-    var spriteHandler = spriteHandlerMap[path];
+  /**
+   * SVGSpriteInject
+   *
+   * 
+   *
+   * Options:
+   * onLoadFail: callback after SVG load fails
+   * onInjected: callback after SVG is injected
+   * 
+   * @param {strine} path - full path to svg sprite
+   * @param {Object} options.
+   */
+  function SVGSpriteInject(path, options) {
+    options = options || {};
+
+    var cached = cachedMap[path];
     
-    if (!spriteHandler) {
+    if (cached) {
+      var svgSprite = cached.svgSprite;
+      if (svgSprite) {
+        onInjected(svgSprite);
+      } else {
+        cached.optionsArr.push(options);
+      }
+    } else {
       var removed = false;
-      var cachedSprite = null;
 
-      spriteHandlerMap[path] = spriteHandler = {
-        remove: function() {
-          if (!removed) {
-            if (cachedSprite) {
-              var parentNode = cachedSprite.parentNode;
-              parentNode && parentNode.removeChild(cachedSprite);
-              cachedSprite = null;
+      cachedMap[path] = cached = {
+        spriteHandler: {
+          remove: function() {
+            if (!removed) {
+              var cachedSvgSprite = cached.svgSprite;
+              if (cachedSvgSprite) {
+                var parentNode = cachedSvgSprite.parentNode;
+                parentNode && parentNode.removeChild(cachedSvgSprite);
+                cached.svgSprite = null;
+              }
+              delete cachedMap[path];
+              removed = true;
             }
-            delete spriteHandlerMap[path];
-            removed = true;
           }
-        }
+        },
+        svgSprite: null;
+        optionsArr: [options]
       };
 
-      load(path, function(sprite) {
+      load(path, function(svgSprite) {
         if (!removed) {
-          cachedSprite = sprite;
-          document.body.appendChild(sprite);
+          cached.svgSprite = svgSprite
+          document.body.appendChild(svgSprite);
+
+          applyOption('onInjected', cached.optionsArr, function(onInjected) {
+            onInjected(svgSprite);
+          });
         }
+      }, function(e) {
+        applyOption('onLoadFailed', cached.optionsArr, function(onLoadFailed) {
+          onLoadFailed(e);
+        });
       }); 
     }
 
-    return spriteHandler;
+    return cached.spriteHandler;
   };
 
   if (typeof module == 'object' && typeof module.exports == 'object') {
