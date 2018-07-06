@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/inconf/svg-sprite-inject/issues"
   },
-  "homepage": "https://github.com/inconf/svg-sprite-inject#readme"
+  "homepage": "https://github.com/inconf/svg-sprite-inject#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.3.0",
+    "gulp-uglify": "^3.0.0"
+  }
 }

@@ -19,7 +19,7 @@ Include the SvgInject javascript file in your HTML document
 ```html
 <head>
   ...
-  <script src="svg-sprite-inject.min.js">
+  <script src="svg-sprite-inject.min.js"></script>
   ...
 </head>
 ```

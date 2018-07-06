@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>SVGSpriteInject Simple Demo</title>
+
+  <!-- Include the SvgSpriteInject javascript file -->
+  <script src="svg-sprite-inject.min.js"></script>
+  
+  <script>
+    /* Inject the icon sprite */
+    SVGSpriteInject('svg-sprite.svg');
+  </script>
+
+  <style>
+    /* Apply colors to injected SVG with id #businesspeople-variation */
+    #variation-2 {
+      --color-1: #68C4B5;
+      --color-2: #FBCA61;
+      --color-3: #DD7378;
+      --color-4: #8B959D;
+    }
+  </style>
+</head>
+<body>
+  <h1>SVGSpriteInject Simple Demo</h1>
+  <h3>Not styled SVG sprite images (default SVG sprite colors):</h3>
+  
+  <!-- Display 5 not styled SVG sprite images -->
+  <div id="variation-1">
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-businesspeople"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-containership"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-hamburger"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-painters_palette"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-record_player"></use></svg>
+  </div>
+
+  <h3>The same SVG sprite images styled with CSS:</h3>
+
+  <!-- Display the same 5 styled SVG sprite images again -->
+  <div id="variation-2">
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-businesspeople"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-containership"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-hamburger"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-painters_palette"></use></svg>
+    <svg width="128" height="128"><use xlink:href="#svg-sprite-record_player"></use></svg>
+  </div>
+</body>
+
+<!-- Don't worry about this script. It's used to provide feedback if the demo is not running correctly. -->
+<script src="_example_helpers/xhr-check.js"></script>
+</html>
