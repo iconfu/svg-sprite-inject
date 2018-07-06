@@ -14,7 +14,7 @@ In order to apply CSS styles to SVG sprite images, the SVG sprite has to be inli
 
 ### Manually 
 
-Include the SvgInject javascript file in the head of your HTML document
+Include the SvgInject javascript file in your HTML document
 
 ```html
 <head>
@@ -42,13 +42,23 @@ $ yarn add @iconfu/svg-sprite-inject
 
 ## Usage
 
-call SvgSpriteInject('path/to/svg-sprite.svg') to inject an SVG sprite
+call SvgSpriteInject(pathToSvg) to inject an SVG sprite.
 
-svg can be references now anywher in the document
 
 ```
-<svg width="128" height="128"><use xlink:href="#image-name"></use></svg>
+SvgSpriteInject('path/to/svg-sprite.svg')
+
 ```
+
+
+You can display SVGs included in the SVG sprite anywhere in your document. 
+
+
+```
+<svg width="128" height="128"><use xlink:href="#svg-sprite-image-name"></use></svg>
+```
+
+
 
 
 ## How does it work?
