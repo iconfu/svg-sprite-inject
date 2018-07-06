@@ -6,7 +6,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inconf/svg-sprite-inject.git"
+    "url": "git+https://github.com/iconfu/svg-sprite-inject.git"
   },
   "keywords": [
     "svg",
@@ -16,9 +16,9 @@
   "author": "iconfu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/inconf/svg-sprite-inject/issues"
+    "url": "https://github.com/iconfu/svg-sprite-inject/issues"
   },
-  "homepage": "https://github.com/inconf/svg-sprite-inject#readme",
+  "homepage": "https://github.com/iconfu/svg-sprite-inject#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.3.0",
