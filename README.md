@@ -34,7 +34,7 @@ minified version: <a href="https://raw.githubusercontent.com/iconfu/svg-sprite-i
 $ npm install @iconfu/svg-sprite-inject
 ```
 
-#### Yarn
+### Yarn
 
 ```
 $ yarn add @iconfu/svg-sprite-inject
@@ -42,7 +42,7 @@ $ yarn add @iconfu/svg-sprite-inject
 
 ## Usage
 
-call SvgSpriteInject(pathToSvg) to inject an SVG sprite.
+Call SvgSpriteInject(pathToSvg) to inject an SVG sprite.
 
 
 ```
@@ -58,8 +58,7 @@ You can display SVGs included in the SVG sprite anywhere in your document.
 <svg width="128" height="128"><use xlink:href="#svg-sprite-image-name"></use></svg>
 ```
 
-
-
+# Advanced Topics
 
 ## How does it work?
 
