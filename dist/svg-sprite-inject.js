@@ -93,7 +93,7 @@
       load(path, function(svgSprite) {
         if (!removed) {
           cached.svgSprite = svgSprite
-          document.body.appendChild(svgSprite);
+          document.documentElement.appendChild(svgSprite);
 
           applyAllOptions('onInjected', cached.optionsArr, function(onInjected) {
             onInjected(svgSprite);

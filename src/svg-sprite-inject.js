@@ -22,11 +22,10 @@
           var div = document.createElement('div');
           div.innerHTML = req.responseText;
           callback(div.childNodes[0]);
-        } else {
-          errorCallback(req.statusText);
         }
       };
 
+      req.onerror = errorCallback;
       req.open('GET', path, true);
       req.send();
     }
@@ -64,7 +63,7 @@
     if (cached) {
       var svgSprite = cached.svgSprite;
       if (svgSprite) {
-        onInjected(svgSprite);
+        options.onInjected && options.onInjected(svgSprite);
       } else {
         cached.optionsArr.push(options);
       }
@@ -93,7 +92,7 @@
       load(path, function(svgSprite) {
         if (!removed) {
           cached.svgSprite = svgSprite
-          document.body.appendChild(svgSprite);
+          document.documentElement.appendChild(svgSprite);
 
           applyAllOptions('onInjected', cached.optionsArr, function(onInjected) {
             onInjected(svgSprite);
@@ -108,6 +107,8 @@
 
     return cached.spriteHandler;
   };
+
+
 
   if (typeof module == 'object' && typeof module.exports == 'object') {
     module.exports = exports = SVGSpriteInject;
