@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>SVGSpriteInject Test Basic</title>
+
+  <link rel="stylesheet" type="text/css" href="css/test_helper.css">
+  <link rel="stylesheet" type="text/css" href="css/test_basic.css">
+
+  <script src="js/svg-sprite-inject.js"></script>
+  <script src="js/test_helper.js"></script>
+  <script src="js/test_basic.js"></script>
+</head>
+<body>
+  <div id="failed">FAILED</div>
+  <div id="success">SUCCESS</div>
+  <div id="running">RUNNING</div>
+
+  <p>Tests must be run on a Webserver or Firefox due to the same-origin-policy of XHR</p>
+
+  <p>All Images must be visible inside the grey boxes and look like the reference images.</p>
+  
+  <h3>Reference Images</h3>
+  <div class="test">
+    <div><img src="ref_imgs/businesspeople.png" alt="businesspeople" /></div>
+    <div><img src="ref_imgs/containership.png" alt="containership" /></div>
+    <div><img src="ref_imgs/hamburger.png" alt="hamburger" /></div>
+    <div><img src="ref_imgs/painters_palette.png" alt="painters_palette" /></div>
+    <div><img src="ref_imgs/record_player.png" alt="record_player" /></div>
+  </div>
+
+  <h3>Test 1</h3>
+  <div id="test-1" class="test">
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-1-businesspeople"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-1-containership"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-1-hamburger"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-1-painters_palette"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-1-record_player"></use></svg></div>
+  </div>
+
+  <h3>Test 2</h3>
+  <div id="test-2" class="test">
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-2-businesspeople"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-2-containership"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-2-hamburger"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-2-painters_palette"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-2-record_player"></use></svg></div>
+  </div>
+
+  <h3>Test 3</h3>
+  <div id="test-3" class="test">
+    <div class="inject-fail"><svg width="128" height="128"><use xlink:href="#"></use></svg></div>
+    <div class="inject-fail"><svg width="128" height="128"><use xlink:href="#"></use></svg></div>
+    <div class="inject-fail"><svg width="128" height="128"><use xlink:href="#"></use></svg></div>
+    <div class="inject-fail"><svg width="128" height="128"><use xlink:href="#"></use></svg></div>
+    <div class="inject-fail"><svg width="128" height="128"><use xlink:href="#"></use></svg></div>
+  </div>
+
+  <h3>Test 4</h3>
+  <div id="test-1" class="test">
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-4-businesspeople"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-4-containership"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-4-hamburger"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-4-painters_palette"></use></svg></div>
+    <div class="inject-success"><svg width="128" height="128"><use xlink:href="#svg-sprite-4-record_player"></use></svg></div>
+  </div>
+</body>
+</html>

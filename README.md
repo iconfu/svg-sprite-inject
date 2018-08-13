@@ -1,4 +1,4 @@
-![minified size](http://img.badgesize.io/iconfu/svg-sprite-inject/master/dist/svg-sprite-inject.min.js?label=minified%20size) ![gzip size](http://img.badgesize.io/iconfu/svg-sprite-inject/master/dist/svg-sprite-inject.min.js?compression=gzip)
+![minified size](http://img.badgesize.io/iconfu/svg-sprite-inject/master/dist/svg-sprite-inject.min.js?label=minified%20size) ![gzip size](http://img.badgesize.io/iconfu/svg-sprite-inject/master/dist/svg-sprite-inject.min.js?compression=gzip) [![npm version](https://badge.fury.io/js/%40iconfu%2Fsvg-sprite-inject.svg)](https://badge.fury.io/js/%40iconfu%2Fsvg-sprite-inject)
 
 
 
@@ -9,7 +9,7 @@ A tiny, intuitive, robust, caching solution for injecting SVG Sprites into the D
 Developed and maintained by [INCORS](http://www.incors.com), the creators of [iconfu.com](https://www.iconfu.com).
 
 
-## What does it do
+## What does it do?
 
 SVGSpriteInject loads an SVG Sprite from an external source and puts it inline at the end of the HTML document. 
 
@@ -56,8 +56,8 @@ $ yarn add @iconfu/svg-sprite-inject
 
 ## Basic Usage
 
-1. Call SvgSpriteInject(pathToSvg) to inject an SVG Sprite.
-2. Display the SVGs of the SVG Sprite in the HTML document with `<svg><use xlink:href="#svg-spite-i"></use></svg>`
+1. Call `SvgSpriteInject(pathToSvg)` to inject an SVG Sprite.
+2. Display the SVGs of the SVG Sprite in the HTML document with `<svg ...><use xlink:href="#..."></use></svg>`
 
 **Example:**
 
@@ -78,7 +78,9 @@ $ yarn add @iconfu/svg-sprite-inject
 </html>
 ```
 
-**That's all: The SVG Sprite is injected and all images referencing images from the SVG Sprite will !!!**
+**That's all: The SVG Sprite gets injected and the images referencing the SVG Sprite will show!!!**
+
+:sparkles: :sparkles: :sparkles:
 
 
 <hr>
@@ -97,14 +99,13 @@ $ yarn add @iconfu/svg-sprite-inject
 
 | Function | Description |
 |----------|-------------|
-| SVGSpriteInject(path, options) | Loads an SVG Sprite with the specified path and puts it in the DOM at the end of the document |
+| SVGSpriteInject(path, options) | Loads an SVG Sprite with the specified path and puts it in the DOM at the end of the document. The optional second parameter sets the [options](#options) for this injection. An `SVGSpriteHandler` object is returned. |
 
-### SpriteHandler
+### SVGSpriteHandler
 
 | Function | Description |
 |----------|-------------|
-| remove() | Remove an SVG Sprite from the document |
-
+| remove() | Remove the SVG Sprite from the document. |
 
 ### Options
 

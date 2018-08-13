@@ -1,17 +1,19 @@
 /**
- * SVGSpriteInject - Simple 
+ * SVGSpriteInject
+ * A tiny, intuitive, robust, caching solution for injecting SVG Sprites into the DOM.
+ * 
  * https://github.com/iconfu/svg-sprite-inject
  *
- * Copyright (c) 2018 Iconfu <info@iconfu.com>
- * @license MIT
+ * Copyright (c) 2018 INCORS, the creators of iconfu.com
+ * @license MIT License - https://github.com/iconfu/svg-sprite-inject/blob/master/LICENSE
  */
 
 (function(window, document) {
+  var CREATE_ELEMENT = 'createElement';
 
-  'use strict';
-
-  var NOOP = function() {};
-
+  var A_ELEMENT = document[CREATE_ELEMENT]('a');
+  var DIV_ELEMENT = document[CREATE_ELEMENT]('div');
+  
   // load svg
   function load(path, callback, errorCallback) {
     if (path) {
@@ -19,9 +21,7 @@
 
       req.onreadystatechange = function() {
         if(req.readyState == 4 && req.status == 200) {
-          var div = document.createElement('div');
-          div.innerHTML = req.responseText;
-          callback(div.childNodes[0]);
+          callback(req.responseText);
         }
       };
 
@@ -29,7 +29,19 @@
       req.open('GET', path, true);
       req.send();
     }
-  };
+  }
+
+  function buildSvgSprite(svgSpriteStr, absUrl) {
+    DIV_ELEMENT.innerHTML = svgSpriteStr;
+    var svg = DIV_ELEMENT.removeChild(DIV_ELEMENT.firstChild);
+    svg.setAttribute('data-inject-url', absUrl);
+    return svg;
+  }
+
+  function getAbsoluteUrl(url) {
+    A_ELEMENT.href = url;
+    return A_ELEMENT.href;
+  }
 
   function applyAllOptions(optionKey, optionsArr, func) {
     for (var i = 0; i < optionsArr.length; ++i) {
@@ -45,8 +57,7 @@
 
   /**
    * SVGSpriteInject
-   *
-   * 
+   * A tiny, intuitive, robust, caching solution for injecting SVG Sprites into the DOM.
    *
    * Options:
    * onLoadFail: callback after SVG load fails
@@ -58,19 +69,22 @@
   function SVGSpriteInject(path, options) {
     options = options || {};
 
-    var cached = cachedMap[path];
+    var absUrl = getAbsoluteUrl(path);
+    var cached = cachedMap[absUrl];
     
     if (cached) {
       var svgSprite = cached.svgSprite;
       if (svgSprite) {
-        options.onInjected && options.onInjected(svgSprite);
+        if (options.onInjected) {
+          options.onInjected(svgSprite);
+        }
       } else {
         cached.optionsArr.push(options);
       }
     } else {
       var removed = false;
 
-      cachedMap[path] = cached = {
+      cachedMap[absUrl] = cached = {
         spriteHandler: {
           remove: function() {
             if (!removed) {
@@ -80,7 +94,7 @@
                 parentNode && parentNode.removeChild(cachedSvgSprite);
                 cached.svgSprite = null;
               }
-              delete cachedMap[path];
+              delete cachedMap[absUrl];
               removed = true;
             }
           }
@@ -89,18 +103,19 @@
         optionsArr: [options]
       };
 
-      load(path, function(svgSprite) {
+      load(path, function(svgSpriteStr) {
+        var svgSprite = buildSvgSprite(svgSpriteStr, absUrl);
         if (!removed) {
           cached.svgSprite = svgSprite
           document.documentElement.appendChild(svgSprite);
 
-          applyAllOptions('onInjected', cached.optionsArr, function(onInjected) {
-            onInjected(svgSprite);
+          applyAllOptions('afterInject', cached.optionsArr, function(afterInject) {
+            afterInject(svgSprite);
           });
         }
       }, function(e) {
-        applyAllOptions('onLoadFailed', cached.optionsArr, function(onLoadFailed) {
-          onLoadFailed(e);
+        applyAllOptions('onLoadFail', cached.optionsArr, function(onLoadFail) {
+          onLoadFail(e);
         });
       }); 
     }
@@ -108,11 +123,9 @@
     return cached.spriteHandler;
   };
 
-
-
   if (typeof module == 'object' && typeof module.exports == 'object') {
-    module.exports = exports = SVGSpriteInject;
-  } else if (typeof window == 'object') {
-    window.SVGSpriteInject = SVGSpriteInject;
+    module.exports = SVGSpriteInject;
   }
+
+  window.SVGSpriteInject = SVGSpriteInject;
 })(window, document);

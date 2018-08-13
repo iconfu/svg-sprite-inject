@@ -1,0 +1,56 @@
+#failed, #success, #running {
+  font-size: 50px;
+}
+#failed {
+  display: none;
+  color: red;
+}
+
+#success {
+  display: none;
+  color: green;
+}
+
+#running {
+  color: orange;
+}
+
+img, svg, .test > div {
+  width: 128px;
+  height: 128px;
+}
+
+.inject-success {
+  --color-1: #ff0000;
+  --color-2: #00ff00;
+  --color-3: #0000ff;  
+  --color-4: #ffff00;
+}
+
+.inject-fail {
+  background: url('../ref_imgs/businesspeople.png') #f0f0f0 !important;
+}
+
+.inject-fail svg {
+  position: relative;
+  top: -64px;
+  left: -64px;
+  width: 256px;
+  height: 256px;
+}
+
+.inject-hide {
+  position: absolute;
+  left: -10000px;
+  z-index: -1;
+}
+
+.test > div {
+  float: left;
+  margin: 10px;
+  background: #f0f0f0;
+}
+
+h3 {
+  clear: both;
+}

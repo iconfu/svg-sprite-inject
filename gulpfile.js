@@ -1,14 +1,24 @@
 'use strict';
 
-var gulp = require('gulp');
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const uglify = require('gulp-uglify');
+const pump = require('pump');
 
-gulp.task('default', function() {
-  return gulp.src('src/svg-sprite-inject.js')
-    .pipe(gulp.dest('dist/'))
-    .pipe(uglify())
-    .pipe(rename({ extname: '.min.js' }))
-    .pipe(gulp.dest('examples/'))
-    .pipe(gulp.dest('dist/'));
+gulp.task('default', function (cb) {
+  pump([
+    gulp.src('src/svg-sprite-inject.js'),
+    gulp.dest('dist/'),
+    gulp.dest('test/js/'),
+    gulp.dest('examples/'),
+    uglify({
+      output: {
+        preamble: "/* MIT License - https://github.com/iconfu/svg-sprite-inject/blob/master/LICENSE */"
+      },
+      ie8: true
+    }),
+    rename({ extname: '.min.js' }),
+    gulp.dest('examples/'),
+    gulp.dest('dist/')
+  ], cb);
 });
